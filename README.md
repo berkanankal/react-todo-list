@@ -9,6 +9,11 @@ First clone this repository.
 git clone https://github.com/berkanankal/react-todo-list.git
 ```
 
+Go to the project directory.
+```bash
+cd react-todo-list
+```
+
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
 ```bash
 npm install
