@@ -18,7 +18,6 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
         <li>
           <a
             className={isSelected.all ? "selected" : ""}
-            href="!#"
             onClick={() => {
               setFilter();
               setIsSelected({
@@ -34,7 +33,6 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
         <li>
           <a
             className={isSelected.active ? "selected" : ""}
-            href="!#"
             onClick={() => {
               setFilter(false);
               setIsSelected({
@@ -50,7 +48,6 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
         <li>
           <a
             className={isSelected.completed ? "selected" : ""}
-            href="!#"
             onClick={() => {
               setFilter(true);
               setIsSelected({
