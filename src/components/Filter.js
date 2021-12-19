@@ -17,6 +17,7 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
       <ul className="filters">
         <li>
           <a
+            href="!#"
             className={isSelected.all ? "selected" : ""}
             onClick={() => {
               setFilter();
@@ -32,6 +33,7 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
         </li>
         <li>
           <a
+            href="!#"
             className={isSelected.active ? "selected" : ""}
             onClick={() => {
               setFilter(false);
@@ -47,6 +49,7 @@ const Filter = ({ todos, setFilter, clearCompleted }) => {
         </li>
         <li>
           <a
+            href="!#"
             className={isSelected.completed ? "selected" : ""}
             onClick={() => {
               setFilter(true);
