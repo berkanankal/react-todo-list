@@ -1,43 +1,63 @@
 import React, { useState } from "react";
-import Filter from "./components/Filter";
-import Form from "./components/Form";
-import List from "./components/List";
+import Header from "./components/Header";
+import Content from "./components/Content";
 import Footer from "./components/Footer";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [todos, setTodos] = useState([
-    { id: 1, task: "Learn Javascript", done: false },
-    { id: 2, task: "Learn React", done: true },
-    { id: 3, task: "Have a life!", done: false },
+    { id: uuidv4(), text: "Learn Javascript", completed: false },
+    { id: uuidv4(), text: "Learn React", completed: true },
+    { id: uuidv4(), text: "Have a life!", completed: false },
   ]);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [checked, setChecked] = useState(false);
 
-  const [filter, setFilter] = useState();
-
-  const deleteTodo = (todo) => {
-    setTodos(todos.filter((t) => t.id !== todo.id));
+  const deleteTodo = (id) => {
+    if (window.confirm("Are you sure?")) {
+      setTodos(todos.filter((t) => t.id !== id));
+    }
   };
 
-  const addTodo = (newTodo) => {
-    setTodos([...todos, newTodo]);
+  const addTodo = (text) => {
+    setTodos([...todos, { id: uuidv4(), text, completed: false }]);
   };
 
   const clearCompleted = () => {
-    setTodos(todos.filter((t) => t.done !== true));
+    if (window.confirm("Are you sure?")) {
+      setTodos(todos.filter((t) => t.completed !== true));
+    }
+  };
+
+  const toggle = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const changeActiveFilter = (filter) => {
+    setActiveFilter(filter);
+  };
+
+  const toggleAll = () => {
+    setChecked(!checked);
+    setTodos(todos.map((todo) => ({ ...todo, completed: !checked })));
   };
 
   return (
     <>
       <section className="todoapp">
-        <Form addTodo={addTodo} />
-        <List
+        <Header addTodo={addTodo} />
+        <Content
           todos={todos}
-          setTodos={setTodos}
           deleteTodo={deleteTodo}
-          filter={filter}
-        />
-        <Filter
-          todos={todos}
-          setFilter={setFilter}
+          toggle={toggle}
+          activeFilter={activeFilter}
+          toggleAll={toggleAll}
+          checked={checked}
+          changeActiveFilter={changeActiveFilter}
           clearCompleted={clearCompleted}
         />
       </section>

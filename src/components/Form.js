@@ -1,38 +1,31 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 const Form = ({ addTodo }) => {
-  const [task, setTask] = useState("");
+  const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (task === "") {
-      return false;
-    }
+    if (!text.trim()) return;
 
-    const newTodo = { id: uuidv4(), task, done: false };
-    addTodo(newTodo);
-    setTask("");
+    addTodo(text.trim());
+    setText("");
   };
 
   const handleChange = (e) => {
-    setTask(e.target.value);
+    setText(e.target.value);
   };
 
   return (
-    <header className="header">
-      <h1>todos</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="new-todo"
-          placeholder="What needs to be done?"
-          autoFocus
-          onChange={handleChange}
-          value={task}
-        />
-      </form>
-    </header>
+    <form onSubmit={handleSubmit}>
+      <input
+        className="new-todo"
+        placeholder="What needs to be done?"
+        autoFocus
+        onChange={handleChange}
+        value={text}
+      />
+    </form>
   );
 };
 
