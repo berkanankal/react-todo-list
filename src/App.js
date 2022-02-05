@@ -11,7 +11,6 @@ const App = () => {
     { id: uuidv4(), text: "Have a life!", completed: false },
   ]);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [checked, setChecked] = useState(false);
 
   const deleteTodo = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -42,8 +41,12 @@ const App = () => {
   };
 
   const toggleAll = () => {
-    setChecked(!checked);
-    setTodos(todos.map((todo) => ({ ...todo, completed: !checked })));
+    setTodos(
+      todos.map((todo) => ({
+        ...todo,
+        completed: !todos.every((t) => t.completed),
+      }))
+    );
   };
 
   return (
@@ -56,7 +59,7 @@ const App = () => {
           toggle={toggle}
           activeFilter={activeFilter}
           toggleAll={toggleAll}
-          checked={checked}
+          checked={todos.every((t) => t.completed)}
           changeActiveFilter={changeActiveFilter}
           clearCompleted={clearCompleted}
         />
